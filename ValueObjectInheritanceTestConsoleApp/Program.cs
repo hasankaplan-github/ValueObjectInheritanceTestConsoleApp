@@ -14,13 +14,13 @@ Console.WriteLine("Hello, World!");
 
 using var db = new TestDbContext();
 
-var customer = new Customer(Guid.NewGuid())
-{
-    Name = "hasan",
-    Document = new Passport("111")
-};
-db.Customer.Add(customer);
-db.SaveChanges();
+//var customer = new Customer(Guid.NewGuid())
+//{
+//    Name = "hasan",
+//    Document = new Passport("111")
+//};
+//db.Customer.Add(customer);
+//db.SaveChanges();
 
 
 var customer2 = db.Customer
@@ -29,6 +29,20 @@ var customer2 = db.Customer
 
 Console.WriteLine(customer2.Document.GetType().Name);
 
+
+//var specialCustomer = new SpecialCustomer(Guid.NewGuid())
+//{
+//    Name = "special customer"
+//};
+//specialCustomer.AddDocument(new Passport("1234"));
+//specialCustomer.AddDocument(new IdentityCard(DateTime.UtcNow));
+//db.SpecialCustomer.Add(specialCustomer);
+//db.SaveChanges();
+
+var specialCustomer2 = db.SpecialCustomer
+    .FirstOrDefault();
+
+Console.WriteLine(specialCustomer2.Documents.Count);
 
 
 

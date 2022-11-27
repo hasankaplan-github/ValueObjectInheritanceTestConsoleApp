@@ -36,4 +36,5 @@ internal class TestDbContext : DbContext
     }
 
     public DbSet<Customer> Customer { get; set; }
+    public DbSet<SpecialCustomer> SpecialCustomer { get; set; }
 }
