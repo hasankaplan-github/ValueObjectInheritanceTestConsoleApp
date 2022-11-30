@@ -92,7 +92,7 @@ namespace ValueObjectInheritanceTestConsoleApp.Migrations
 
             modelBuilder.Entity("ValueObjectInheritanceTestConsoleApp.Domain.SpecialCustomer", b =>
                 {
-                    b.OwnsMany("ValueObjectInheritanceTestConsoleApp.Domain.SpecialCustomerDocument", "_specialCustomerDocuments", b1 =>
+                    b.OwnsMany("ValueObjectInheritanceTestConsoleApp.Domain.DocumentContainer", "_documentContainers", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .ValueGeneratedOnAdd()
@@ -103,52 +103,32 @@ namespace ValueObjectInheritanceTestConsoleApp.Migrations
                                 .HasColumnType("uuid")
                                 .HasColumnName("special_customer_id");
 
+                            b1.Property<DateTime?>("_issueDate")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("document_issue_date");
+
+                            b1.Property<string>("_serialNumber")
+                                .HasColumnType("text")
+                                .HasColumnName("document_serial_number");
+
+                            b1.Property<int>("_type")
+                                .HasColumnType("integer")
+                                .HasColumnName("document_type");
+
                             b1.HasKey("Id")
-                                .HasName("pk_special_customer_document");
+                                .HasName("pk_special_customer__document_containers");
 
                             b1.HasIndex("SpecialCustomerId")
-                                .HasDatabaseName("ix_special_customer_document_special_customer_id");
+                                .HasDatabaseName("ix_special_customer__document_containers_special_customer_id");
 
-                            b1.ToTable("special_customer_document", (string)null);
+                            b1.ToTable("special_customer__document_containers", (string)null);
 
-                            b1.WithOwner("SpecialCustomer")
+                            b1.WithOwner()
                                 .HasForeignKey("SpecialCustomerId")
-                                .HasConstraintName("fk_special_customer_document_special_customer_special_customer");
-
-                            b1.OwnsOne("ValueObjectInheritanceTestConsoleApp.Domain.DocumentContainer", "_documentContainer", b2 =>
-                                {
-                                    b2.Property<Guid>("SpecialCustomerDocumentId")
-                                        .HasColumnType("uuid")
-                                        .HasColumnName("id");
-
-                                    b2.Property<DateTime?>("_issueDate")
-                                        .HasColumnType("timestamp with time zone")
-                                        .HasColumnName("document_issue_date");
-
-                                    b2.Property<string>("_serialNumber")
-                                        .HasColumnType("text")
-                                        .HasColumnName("document_serial_number");
-
-                                    b2.Property<int>("_type")
-                                        .HasColumnType("integer")
-                                        .HasColumnName("document_type");
-
-                                    b2.HasKey("SpecialCustomerDocumentId");
-
-                                    b2.ToTable("special_customer_document");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("SpecialCustomerDocumentId")
-                                        .HasConstraintName("fk_special_customer_document_special_customer_document_id");
-                                });
-
-                            b1.Navigation("SpecialCustomer");
-
-                            b1.Navigation("_documentContainer")
-                                .IsRequired();
+                                .HasConstraintName("fk_special_customer__document_containers_special_customer_spec");
                         });
 
-                    b.Navigation("_specialCustomerDocuments");
+                    b.Navigation("_documentContainers");
                 });
 #pragma warning restore 612, 618
         }

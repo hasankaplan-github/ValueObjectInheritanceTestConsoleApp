@@ -11,13 +11,12 @@ public class SpecialCustomer : Entity<Guid>
 {
     public string Name { get; set; }
 
-    private List<SpecialCustomerDocument> _specialCustomerDocuments = new();
-    public IReadOnlyCollection<Document> Documents => 
-        _specialCustomerDocuments
+    private List<DocumentContainer> _documentContainers = new();
+    public IReadOnlyCollection<Document> Documents =>
+        _documentContainers
         .Select(x => x.Document)
         .ToList()
         .AsReadOnly();
-    
     public SpecialCustomer(Guid id)
         : base(id)
     {
@@ -26,6 +25,6 @@ public class SpecialCustomer : Entity<Guid>
 
     public void AddDocument(Document document)
     {
-        _specialCustomerDocuments.Add(new SpecialCustomerDocument { Document = document, SpecialCustomer = this });
+        _documentContainers.Add(new DocumentContainer { Document = document });
     }
 }

@@ -9,20 +9,16 @@ public class SpecialCustomerEntityTypeConfiguration : IEntityTypeConfiguration<S
 {
     public void Configure(EntityTypeBuilder<SpecialCustomer> builder)
     {
-        builder.OwnsMany(typeof(SpecialCustomerDocument), "_specialCustomerDocuments", x =>
+        builder.OwnsMany(typeof(DocumentContainer), "_documentContainers", x =>
         {
-            x.WithOwner("SpecialCustomer");
-            x.Property(typeof(Guid), "Id");
+            x.WithOwner().HasForeignKey("SpecialCustomerId");
+            x.Property<Guid>("Id");
             x.HasKey("Id");
             x.Ignore("Document");
 
-            x.OwnsOne(typeof(DocumentContainer), "_documentContainer", y =>
-            {
-                y.Property("_type").HasColumnName("document_type");
-                y.Property("_issueDate").HasColumnName("document_issue_date");
-                y.Property("_serialNumber").HasColumnName("document_serial_number");
-                y.Ignore("Document");
-            });
+            x.Property("_type").HasColumnName("document_type");
+            x.Property("_serialNumber").HasColumnName("document_serial_number");
+            x.Property("_issueDate").HasColumnName("document_issue_date");
         });
 
         builder.Ignore(x => x.Documents);
