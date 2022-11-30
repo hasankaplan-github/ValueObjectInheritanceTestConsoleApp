@@ -8,7 +8,7 @@ namespace ValueObjectInheritanceTestConsoleApp.Domain;
 
 public class Passport : Document
 {
-    public string SerialNumber { get; set; }
+    public string SerialNumber { get; private set; }
 
     private Passport()
     {

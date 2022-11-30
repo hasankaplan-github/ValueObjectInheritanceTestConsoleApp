@@ -9,6 +9,8 @@ using System.Xml.Linq;
 namespace ValueObjectInheritanceTestConsoleApp.Domain;
 public class DocumentContainer
 {
+    private Guid _id;
+
     private DocumentType _type;
     private DateTime? _issueDate;
     private string? _serialNumber;
@@ -21,10 +23,10 @@ public class DocumentContainer
             switch (_type)
             {
                 case DocumentType.IdentityCard:
-                    return new IdentityCard(_issueDate.Value);
+                    return new IdentityCard(_issueDate.Value) { Id = _id };
 
                 case DocumentType.Passport:
-                    return new Passport(_serialNumber);
+                    return new Passport(_serialNumber) { Id = _id };
 
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -32,6 +34,8 @@ public class DocumentContainer
         }
         set
         {
+            _id = value.Id;
+
             switch (value)
             {
                 case IdentityCard identityCard:

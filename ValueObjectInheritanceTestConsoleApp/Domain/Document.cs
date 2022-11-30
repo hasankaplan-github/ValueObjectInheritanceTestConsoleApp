@@ -9,6 +9,8 @@ namespace ValueObjectInheritanceTestConsoleApp.Domain;
 
 public abstract class Document : ValueObject
 {
+    public Guid Id { get; init; }
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         return Enumerable.Empty<object>();

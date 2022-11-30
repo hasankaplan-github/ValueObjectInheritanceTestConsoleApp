@@ -14,13 +14,13 @@ Console.WriteLine("Hello, World!");
 
 using var db = new TestDbContext();
 
-//var customer = new Customer(Guid.NewGuid())
-//{
-//    Name = "hasan",
-//    Document = new Passport("111")
-//};
-//db.Customer.Add(customer);
-//db.SaveChanges();
+var customer = new Customer(Guid.NewGuid())
+{
+    Name = "hasan",
+    Document = new Passport("111")
+};
+db.Customer.Add(customer);
+db.SaveChanges();
 
 
 var customer2 = db.Customer
@@ -30,19 +30,44 @@ var customer2 = db.Customer
 Console.WriteLine(customer2.Document.GetType().Name);
 
 
-//var specialCustomer = new SpecialCustomer(Guid.NewGuid())
-//{
-//    Name = "special customer"
-//};
-//specialCustomer.AddDocument(new Passport("1234"));
-//specialCustomer.AddDocument(new IdentityCard(DateTime.UtcNow));
-//db.SpecialCustomer.Add(specialCustomer);
-//db.SaveChanges();
+var specialCustomer = new SpecialCustomer(Guid.NewGuid())
+{
+    Name = "special customer"
+};
+
+specialCustomer.AddDocument(new Passport("1234"));
+specialCustomer.AddDocument(new IdentityCard(DateTime.UtcNow));
+db.SpecialCustomer.Add(specialCustomer);
+db.SaveChanges();
 
 var specialCustomer2 = db.SpecialCustomer
     .FirstOrDefault();
 
 Console.WriteLine(specialCustomer2.Documents.Count);
+
+foreach (var document in specialCustomer2.Documents)
+{
+    switch (document)
+    {
+        case Passport passport:
+            Console.WriteLine("----");
+            Console.WriteLine(passport.GetType().Name);
+            Console.WriteLine(passport.Id);
+            Console.WriteLine(passport.SerialNumber);
+            Console.WriteLine("----");
+            break;
+        case IdentityCard identityCard:
+            Console.WriteLine("----");
+            Console.WriteLine(identityCard.GetType().Name);
+            Console.WriteLine(identityCard.Id);
+            Console.WriteLine(identityCard.IssueDate);
+            Console.WriteLine("----");
+            break;
+        default:
+            break;
+    }
+}
+
 
 
 

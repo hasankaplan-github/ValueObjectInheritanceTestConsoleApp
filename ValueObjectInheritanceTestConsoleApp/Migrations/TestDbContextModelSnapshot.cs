@@ -60,7 +60,7 @@ namespace ValueObjectInheritanceTestConsoleApp.Migrations
 
             modelBuilder.Entity("ValueObjectInheritanceTestConsoleApp.Domain.Customer", b =>
                 {
-                    b.OwnsOne("ValueObjectInheritanceTestConsoleApp.Domain.DocumentContainer", "_documentContainer", b1 =>
+                    b.OwnsOne("ValueObjectInheritanceTestConsoleApp.Domain.Customer._documentContainer#ValueObjectInheritanceTestConsoleApp.Domain.DocumentContainer", "_documentContainer", b1 =>
                         {
                             b1.Property<Guid>("CustomerId")
                                 .HasColumnType("uuid")
@@ -80,7 +80,7 @@ namespace ValueObjectInheritanceTestConsoleApp.Migrations
 
                             b1.HasKey("CustomerId");
 
-                            b1.ToTable("customer");
+                            b1.ToTable("customer", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CustomerId")
@@ -92,7 +92,7 @@ namespace ValueObjectInheritanceTestConsoleApp.Migrations
 
             modelBuilder.Entity("ValueObjectInheritanceTestConsoleApp.Domain.SpecialCustomer", b =>
                 {
-                    b.OwnsMany("ValueObjectInheritanceTestConsoleApp.Domain.DocumentContainer", "_documentContainers", b1 =>
+                    b.OwnsMany("ValueObjectInheritanceTestConsoleApp.Domain.SpecialCustomer._documentContainers#ValueObjectInheritanceTestConsoleApp.Domain.DocumentContainer", "_documentContainers", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .ValueGeneratedOnAdd()

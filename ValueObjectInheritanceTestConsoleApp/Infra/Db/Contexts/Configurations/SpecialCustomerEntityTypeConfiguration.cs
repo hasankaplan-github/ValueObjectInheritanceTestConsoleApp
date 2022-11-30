@@ -12,8 +12,8 @@ public class SpecialCustomerEntityTypeConfiguration : IEntityTypeConfiguration<S
         builder.OwnsMany(typeof(DocumentContainer), "_documentContainers", x =>
         {
             x.WithOwner().HasForeignKey("SpecialCustomerId");
-            x.Property<Guid>("Id");
-            x.HasKey("Id");
+            x.Property<Guid>("_id").HasColumnName("id");
+            x.HasKey("_id");
             x.Ignore("Document");
 
             x.Property("_type").HasColumnName("document_type");

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ValueObjectInheritanceTestConsoleApp.Domain;
 public class IdentityCard : Document
 {
-    public DateTime IssueDate { get; set; }
+    public DateTime IssueDate { get; private set; }
 
     private IdentityCard()
     {
